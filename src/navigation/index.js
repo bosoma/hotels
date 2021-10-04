@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { Text } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import styles from './styles.js'
+import Home from 'root/src/screens/home';
+
+import styles from './styles.js';
 
 
 const Stack = createNativeStackNavigator();
@@ -15,7 +16,7 @@ const RootNavigator = () => {
         headerTintColor: styles.color,
         headerTitleAlign: 'center'
       }}>
-        <Stack.Screen name="Initial" component={() => <Text>Initial</Text>} />
+        <Stack.Screen name="Initial" component={Home} />
       </Stack.Navigator>
   );
 }
