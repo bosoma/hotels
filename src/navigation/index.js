@@ -16,7 +16,7 @@ const RootNavigator = () => {
         headerTintColor: styles.color,
         headerTitleAlign: 'center'
       }}>
-        <Stack.Screen name="Initial" component={Home} />
+        <Stack.Screen name="Hotels Guide" component={Home} />
       </Stack.Navigator>
   );
 }

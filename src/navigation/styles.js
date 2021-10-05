@@ -1,7 +1,7 @@
-import * as colors from 'root/src/constants/colors';
+import colors from 'root/src/constants/colors';
 
 const styles = {
-    color: colors.navyBlue,
+    color: 'white',
     backgroundColor: colors.blueGreen,
     alignItems: 'center'
 };
