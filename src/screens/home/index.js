@@ -1,12 +1,14 @@
 import React from 'react';
-import {View} from 'react-native';
+import {SafeAreaView} from 'react-native';
 import HotelsList from 'root/src/components/hotelsList';
+
+import styles from './styles';
 
 const Home = () => {
   return (
-    <View>
-      <HotelsList/>
-    </View>
+    <SafeAreaView style={styles.bg}>
+      <HotelsList />
+    </SafeAreaView>
   );
 };
 

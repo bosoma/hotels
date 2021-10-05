@@ -1,26 +1,28 @@
-import React from 'react';
-import {View} from 'react-native';
-import {ListItem, Avatar, Rating} from 'react-native-elements';
+import React, {useState} from 'react';
+import {Image, View, TouchableOpacity, Text} from 'react-native';
+import {Rating} from 'react-native-elements';
 
 import styles from './styles';
 
 // Rating used here both for stars indicator and rating average
 const Hotel = ({hotelData}) => {
 
-  const subtitle = '';
-  const title = hotelData.name.slice(0, 35)
+  const [isExpanded, setExpanded] = useState(false);
+
   return (
-    <ListItem bottomDivider onPress={() => console.log('pressed')}>
-      <Avatar source={{uri: hotelData.gallery[0]}} />
-      <ListItem.Content>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => setExpanded(!isExpanded)}>
+      <View style={styles.overview}>
+        <Image style={styles.image} source={{uri: hotelData.gallery[0]}} />
         <View style={styles.internalRow}>
-          <ListItem.Title style={styles.title} numberOfLines={2}>
-            {title}
-          </ListItem.Title>
+          <Text style={styles.title} numberOfLines={2}>
+            {hotelData.name}
+          </Text>
           <View style={styles.hotelStars}>
             <Rating
               readonly
-              imageSize={15}
+              imageSize={10}
               ratingCount={hotelData.stars}
               startingValue={hotelData.stars}
               type="custom"
@@ -28,9 +30,13 @@ const Hotel = ({hotelData}) => {
             />
           </View>
         </View>
-        {/* <ListItem.Subtitle>{subtitle}</ListItem.Subtitle> */}
-      </ListItem.Content>
-    </ListItem>
+      </View>
+      {!!isExpanded && (
+        <View>
+          <Text style={styles.details}>test</Text>
+        </View>
+      )}
+    </TouchableOpacity>
   );
 };
 

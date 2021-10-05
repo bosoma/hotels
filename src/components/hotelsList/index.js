@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, FlatList, ActivityIndicator} from 'react-native';
+import {View, FlatList, ActivityIndicator, Button} from 'react-native';
 
 import {getHotels} from 'root/src/api';
 import Hotel from 'root/src/components/hotel';
@@ -12,19 +12,21 @@ const HotelsList = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-
+    let isMounted = true; 
     if (!hotels.length) {
       getHotels()
         .then(response => response.json())
         .then(result => {
-          setHotels(result);
-          setLoading(false);
-          console.log('···· data received');
+          if (isMounted) {
+            setHotels(result);
+            setLoading(false);
+          }          
         })
         .catch(error => {
           console.error(error);
         });
     }
+    return () => { isMounted = false };
   }, []);
 
   return (
