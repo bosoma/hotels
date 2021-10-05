@@ -7,14 +7,31 @@ import styles from './styles';
 // Rating used here both for stars indicator and rating average
 const Hotel = ({hotelData}) => {
 
+  const defaultImg = 'https://cdn.icon-icons.com/icons2/2490/PNG/512/hotel_icon_150155.png';
+
   const [isExpanded, setExpanded] = useState(false);
+  const [imageIndex, setImageIndex] = useState(0);
+  const [avatarImg, setAvatarImg] = useState(
+    hotelData.gallery ? hotelData.gallery[imageIndex] : defaultImg,
+  );
 
   return (
     <TouchableOpacity
       style={styles.container}
       onPress={() => setExpanded(!isExpanded)}>
       <View style={styles.overview}>
-        <Image style={styles.image} source={{uri: hotelData.gallery[0]}} />
+        <Image
+          key={imageIndex}
+          style={styles.image}
+          source={{uri: avatarImg}}
+          onError={e => {
+            setImageIndex(imageIndex + 1);
+            setAvatarImg(hotelData.gallery[imageIndex])
+            if (imageIndex === hotelData.gallery.length-1) {
+              setAvatarImg(defaultImg);
+            }
+          }}
+        />
         <View style={styles.internalRow}>
           <Text style={styles.title} numberOfLines={2}>
             {hotelData.name}
