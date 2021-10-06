@@ -2,16 +2,24 @@ import colors from 'root/src/constants/colors';
 
 const styles = {
   container: {
-    padding: 15,
     borderTopWidth: 1,
     borderColor: '#F8F8F8',
     margin: 1,
     borderRadius: 5,
   },
   overview: {
+    padding: 15,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: 60,
+    shadowColor: colors.babyBlue,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
   },
   image: {
     flex: 1,
@@ -26,15 +34,12 @@ const styles = {
   },
   hotelStars: {
     color: colors.blueGrotto,
-    paddingLeft: 2
+    paddingLeft: 2,
   },
   title: {
     fontWeight: '600',
     fontSize: 15,
   },
-  details: {
-    padding: 15,
-  }
 };
 
 export default styles;

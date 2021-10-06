@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
 import {Image, View, TouchableOpacity, Text} from 'react-native';
-import {Rating} from 'react-native-elements';
+import {Rating, Icon, Button} from 'react-native-elements';
+
+import ItemDetails from 'root/src/components/itemDetails';
 
 import styles from './styles';
 
-// Rating used here both for stars indicator and rating average
 const Hotel = ({hotelData}) => {
-
-  const defaultImg = 'https://cdn.icon-icons.com/icons2/2490/PNG/512/hotel_icon_150155.png';
+  const defaultImg =
+    'https://cdn.icon-icons.com/icons2/2490/PNG/512/hotel_icon_150155.png';
 
   const [isExpanded, setExpanded] = useState(false);
   const [imageIndex, setImageIndex] = useState(0);
@@ -25,9 +26,10 @@ const Hotel = ({hotelData}) => {
           style={styles.image}
           source={{uri: avatarImg}}
           onError={e => {
+            hotelData.gallery
             setImageIndex(imageIndex + 1);
-            setAvatarImg(hotelData.gallery[imageIndex])
-            if (imageIndex === hotelData.gallery.length-1) {
+            setAvatarImg(hotelData.gallery[imageIndex]);
+            if (imageIndex === hotelData.gallery.length - 1) {
               setAvatarImg(defaultImg);
             }
           }}
@@ -47,11 +49,17 @@ const Hotel = ({hotelData}) => {
             />
           </View>
         </View>
+
       </View>
       {!!isExpanded && (
-        <View>
-          <Text style={styles.details}>test</Text>
-        </View>
+        <ItemDetails
+          rating={hotelData.userRating}
+          location={hotelData.location}
+          checks={{in: hotelData.checkIn, out: hotelData.checkOut}}
+          contact={hotelData.contact}
+          images={hotelData.gallery}
+          price={{qty: hotelData.price, currency: hotelData.currency}}
+        />
       )}
     </TouchableOpacity>
   );
