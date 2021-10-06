@@ -26,10 +26,9 @@ const Hotel = ({hotelData}) => {
           source={{uri: avatarImg}}
           onError={e => {
             hotelData.gallery.splice(0, 1);
-            setAvatarImg(hotelData.gallery[0]);
-            if (!hotelData.gallery.length) {
-              setAvatarImg(defaultImg);
-            }
+            setAvatarImg(
+              !hotelData.gallery.length ? defaultImg : hotelData.gallery[0],
+            );
           }}
         />
         <View style={styles.internalRow}>
@@ -47,7 +46,6 @@ const Hotel = ({hotelData}) => {
             />
           </View>
         </View>
-
       </View>
       {!!isExpanded && (
         <ItemDetails

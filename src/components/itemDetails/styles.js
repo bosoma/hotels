@@ -1,6 +1,3 @@
-import colors from 'root/src/constants/colors';
-
-
 const styles = {
   container: {
     borderColor: 'whitesmoke',

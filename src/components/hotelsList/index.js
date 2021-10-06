@@ -7,8 +7,6 @@ import styles from './styles';
 
 const HotelsList = ({hotels = null}) => {
 
-  //console.log('*hotels', hotels)
-
   return (
     <View>
       {!hotels ? (
