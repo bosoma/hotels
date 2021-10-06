@@ -1,7 +1,8 @@
 const styles = {
     loadingContainer: {
         alignItems: 'center',
-        justifyContent: 'center',
+        marginTop: 15,
+        justifyContent: 'flex-start',
         height: '100%',
     }
 };
