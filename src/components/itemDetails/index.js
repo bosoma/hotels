@@ -28,6 +28,7 @@ const ItemDetails = ({rating, location, checks, contact, images, price}) => {
       <Text style={styles.rating}>{rating} /10</Text>
 
       <Rating
+        readonly
         imageSize={30}
         fractions={1}
         ratingCount={5}
