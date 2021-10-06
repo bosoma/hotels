@@ -1,5 +1,6 @@
 import colors from 'root/src/constants/colors';
 
+
 const styles = {
   container: {
     borderColor: 'whitesmoke',
@@ -31,6 +32,10 @@ const styles = {
     fontWeight: 'bold',
     marginBottom: 2
   },
+  overlay: {
+    height: '100%',
+    backgroundColor: 'transparent',
+  }
 };
 
 export default styles;

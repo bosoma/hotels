@@ -1,23 +1,32 @@
 import React, {useState} from 'react';
 import {View, Linking, Text} from 'react-native';
-import {Rating, PricingCard} from 'react-native-elements';
+import {Rating, PricingCard, Overlay} from 'react-native-elements';
+import Gallery from 'react-native-image-gallery';
 
 import styles from './styles';
 
 const currencies = {
-  'EUR' : '€',
-  'USD' : '$'
-}
+  EUR: '€',
+  USD: '$',
+};
 
 const ItemDetails = ({rating, location, checks, contact, images, price}) => {
+  const [isGalleryOpen, setIsOpenGallery] = useState(false);
+
   const details = [
     `Address: ${location.address}, ${location.city}`,
     `Checkin: ${checks.in.from}-${checks.in.to}`,
     `Checkout: ${checks.out.from}-${checks.out.to}`,
   ];
+
+  const imgs = images.map(img => {
+    return {source: {uri: img}};
+  });
+
   return (
     <View style={styles.container}>
       <Text style={styles.rating}>{rating} /10</Text>
+
       <Rating
         imageSize={30}
         fractions={1}
@@ -25,11 +34,14 @@ const ItemDetails = ({rating, location, checks, contact, images, price}) => {
         startingValue={(rating / 2).toFixed(1)}
       />
       <PricingCard
-        //color={styles.rating.color}
         title={'Price:'}
         price={`${price.qty} ${currencies[price.currency]}`}
         info={details}
-        button={{title: 'Gallery'}}
+        button={{
+          title: 'Gallery',
+          disabled: !imgs.length,
+          onPress: () => setIsOpenGallery(true),
+        }}
       />
       <View style={styles.contact}>
         <Text style={styles.contactTitle}>Contact: </Text>
@@ -46,6 +58,13 @@ const ItemDetails = ({rating, location, checks, contact, images, price}) => {
           </Text>
         </View>
       </View>
+
+      <Overlay
+        isVisible={isGalleryOpen && imgs.length > 0}
+        onBackdropPress={() => setIsOpenGallery(false)}
+        overlayStyle={styles.overlay}>
+        <Gallery images={imgs} />
+      </Overlay>
     </View>
   );
 };

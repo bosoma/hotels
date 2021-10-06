@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Image, View, TouchableOpacity, Text} from 'react-native';
-import {Rating, Icon, Button} from 'react-native-elements';
+import {Rating} from 'react-native-elements';
 
 import ItemDetails from 'root/src/components/itemDetails';
 
@@ -11,9 +11,8 @@ const Hotel = ({hotelData}) => {
     'https://cdn.icon-icons.com/icons2/2490/PNG/512/hotel_icon_150155.png';
 
   const [isExpanded, setExpanded] = useState(false);
-  const [imageIndex, setImageIndex] = useState(0);
   const [avatarImg, setAvatarImg] = useState(
-    hotelData.gallery ? hotelData.gallery[imageIndex] : defaultImg,
+    hotelData.gallery ? hotelData.gallery[0] : defaultImg,
   );
 
   return (
@@ -22,14 +21,13 @@ const Hotel = ({hotelData}) => {
       onPress={() => setExpanded(!isExpanded)}>
       <View style={styles.overview}>
         <Image
-          key={imageIndex}
+          key={avatarImg}
           style={styles.image}
           source={{uri: avatarImg}}
           onError={e => {
-            hotelData.gallery
-            setImageIndex(imageIndex + 1);
-            setAvatarImg(hotelData.gallery[imageIndex]);
-            if (imageIndex === hotelData.gallery.length - 1) {
+            hotelData.gallery.splice(0, 1);
+            setAvatarImg(hotelData.gallery[0]);
+            if (!hotelData.gallery.length) {
               setAvatarImg(defaultImg);
             }
           }}
