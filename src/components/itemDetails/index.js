@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {View, Linking, Text} from 'react-native';
-import {Rating, PricingCard, Overlay} from 'react-native-elements';
+import {View, Linking, Text, TouchableOpacity} from 'react-native';
+import {Rating, PricingCard, Overlay, Icon} from 'react-native-elements';
 import Gallery from 'react-native-image-gallery';
 
 import styles from './styles';
@@ -63,6 +63,9 @@ const ItemDetails = ({rating, location, checks, contact, images, price}) => {
         isVisible={isGalleryOpen && imgs.length > 0}
         onBackdropPress={() => setIsOpenGallery(false)}
         overlayStyle={styles.overlay}>
+        <TouchableOpacity onPress={() => setIsOpenGallery(false)}>
+          <Icon style={{alignSelf: 'flex-end'}} name="close" color="white" />
+        </TouchableOpacity>
         <Gallery images={imgs} />
       </Overlay>
     </View>

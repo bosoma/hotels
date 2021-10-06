@@ -30,7 +30,7 @@ const styles = {
     marginBottom: 2
   },
   overlay: {
-    height: '100%',
+    height: '70%',
     backgroundColor: 'transparent',
   }
 };
