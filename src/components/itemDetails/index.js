@@ -4,8 +4,14 @@ import {Rating, PricingCard} from 'react-native-elements';
 
 import styles from './styles';
 
+const currencies = {
+  'EUR' : '€',
+  'USD' : '$'
+}
+
 const ItemDetails = ({rating, location, checks, contact, images, price}) => {
   const details = [
+    `Address: ${location.address}, ${location.city}`,
     `Checkin: ${checks.in.from}-${checks.in.to}`,
     `Checkout: ${checks.out.from}-${checks.out.to}`,
   ];
@@ -19,20 +25,21 @@ const ItemDetails = ({rating, location, checks, contact, images, price}) => {
         startingValue={(rating / 2).toFixed(1)}
       />
       <PricingCard
-        color="#4f9deb"
-        title={`${location.address}, ${location.city}`}
-        price={`${price.qty} ${price.currency}`}
+        //color={styles.rating.color}
+        title={'Price:'}
+        price={`${price.qty} ${currencies[price.currency]}`}
         info={details}
         button={{title: 'Gallery'}}
       />
       <View style={styles.contact}>
-        <View style={styles.email}>
+        <Text style={styles.contactTitle}>Contact: </Text>
+        <View style={styles.contactRow}>
           <Text>Email: </Text>
           <Text onPress={() => Linking.openURL(`mailto:${contact.email}`)}>
             {contact.email}
           </Text>
         </View>
-        <View style={styles.phone}>
+        <View style={styles.contactRow}>
           <Text>Phone Number: </Text>
           <Text onPress={() => Linking.openURL(`tel:${contact.phoneNumber}`)}>
             {contact.phoneNumber}

@@ -8,7 +8,7 @@ const styles = {
     borderRadius: 5,
   },
   overview: {
-    padding: 15,
+    padding: 11,
     flexDirection: 'row',
     justifyContent: 'space-between',
     shadowColor: colors.babyBlue,
@@ -18,17 +18,17 @@ const styles = {
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-
     elevation: 5,
   },
   image: {
     flex: 1,
     width: 50,
-    height: 60,
+    height: 50,
     borderRadius: 15,
   },
   internalRow: {
-    padding: 15,
+    minHeight: 55,
+    padding: 10,
     flex: 5,
     flexDirection: 'row',
   },
