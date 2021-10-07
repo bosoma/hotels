@@ -2,11 +2,10 @@ import React from 'react';
 import {View, FlatList, ActivityIndicator} from 'react-native';
 
 import Hotel from 'root/src/components/hotel';
-import Filter from 'root/src/components/filter';
 
 import styles from './styles';
 
-const HotelsList = ({hotels = null, filterOptions, updateData}) => {
+const HotelsList = ({hotels = null, listHeaderComponent}) => {
   return (
     <View>
       {!hotels ? (
@@ -15,9 +14,7 @@ const HotelsList = ({hotels = null, filterOptions, updateData}) => {
         </View>
       ) : (
         <FlatList
-          ListHeaderComponent={
-            <Filter filterOptions={filterOptions} updateData={updateData} />
-          }
+          ListHeaderComponent={listHeaderComponent}
           keyExtractor={item => item.id}
           data={hotels}
           renderItem={hotelData => <Hotel hotelData={hotelData.item} />}

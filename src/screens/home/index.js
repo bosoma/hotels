@@ -1,9 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import {SafeAreaView, Text, View, ActivityIndicator} from 'react-native';
-import {SearchBar, ButtonGroup} from 'react-native-elements';
-import {startCase} from 'lodash';
+import {View, ActivityIndicator} from 'react-native';
 
 import HotelsList from 'root/src/components/hotelsList';
+import Filter from 'root/src/components/filter';
 import {getHotels} from 'root/src/api';
 
 import styles from './styles';
@@ -69,8 +68,9 @@ const Home = () => {
     <View style={styles.bg}>
       <HotelsList
         hotels={filteredElements}
-        filterOptions={filterOptions}
-        updateData={updateData}
+        listHeaderComponent={
+          <Filter filterOptions={filterOptions} updateData={updateData} />
+        }
       />
     </View>
   );
