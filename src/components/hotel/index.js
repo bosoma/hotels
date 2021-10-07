@@ -25,6 +25,7 @@ const Hotel = ({hotelData}) => {
           style={styles.image}
           source={{uri: avatarImg}}
           onError={e => {
+            // I delete the failed images to avoid to retry to load them in the gallery
             hotelData.gallery.splice(0, 1);
             setAvatarImg(
               !hotelData.gallery.length ? defaultImg : hotelData.gallery[0],

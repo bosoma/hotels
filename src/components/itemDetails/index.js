@@ -5,6 +5,7 @@ import Gallery from 'react-native-image-gallery';
 
 import styles from './styles';
 
+// It would be better to use a library to manage any currency ISOCode<>symbol and vice versa
 const currencies = {
   EUR: '€',
   USD: '$',

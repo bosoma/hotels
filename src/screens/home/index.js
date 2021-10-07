@@ -7,7 +7,9 @@ import {getHotels} from 'root/src/api';
 
 import styles from './styles';
 
+// Literal object keys that are in hotel, but it could be some intermediate mapping if necessary
 const filterOptions = ['name', 'city', 'stars', 'price'];
+
 
 const Home = () => {
   const [filteredElements, setFilteredElements] = useState([]);
