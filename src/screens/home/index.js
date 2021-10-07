@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {SafeAreaView, Text, View, ActivityIndicator} from 'react-native';
 import {SearchBar, ButtonGroup} from 'react-native-elements';
 import {startCase} from 'lodash';
+
 import HotelsList from 'root/src/components/hotelsList';
 import {getHotels} from 'root/src/api';
 
@@ -11,8 +12,7 @@ const filterOptions = ['name', 'city', 'stars', 'price'];
 
 const Home = () => {
   const [filteredElements, setFilteredElements] = useState([]);
-  const [searchValue, setSearchValue] = useState('');
-  const [activeFilterOptions, setActiveFilterOptions] = useState([]);
+
   const [hotels, setHotels] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -37,8 +37,7 @@ const Home = () => {
     };
   }, []);
 
-  const updateData = newValue => {
-    setSearchValue(newValue);
+  const updateData = (newValue, activeFilterOptions) => {
     if (!newValue) {
       setFilteredElements(hotels);
     } else {
@@ -58,14 +57,6 @@ const Home = () => {
     }
   };
 
-  useEffect(() => {
-    updateData(searchValue);
-  }, [activeFilterOptions]);
-
-  const buttons = filterOptions.map(el => {
-    return {element: () => <Text>{startCase(el)}</Text>};
-  });
-
   if (loading) {
     return (
       <View style={styles.loadingContainer}>
@@ -75,24 +66,13 @@ const Home = () => {
   }
 
   return (
-    <SafeAreaView style={styles.bg}>
-      <>
-        <SearchBar
-          placeholder="Search.."
-          onChangeText={val => updateData(val)}
-          value={searchValue}
-          lightTheme
-          searchIcon={false}
-        />
-        <ButtonGroup
-          onPress={setActiveFilterOptions}
-          selectMultiple
-          selectedIndexes={activeFilterOptions}
-          buttons={buttons}
-        />
-      </>
-      <HotelsList hotels={filteredElements} />
-    </SafeAreaView>
+    <View style={styles.bg}>
+      <HotelsList
+        hotels={filteredElements}
+        filterOptions={filterOptions}
+        updateData={updateData}
+      />
+    </View>
   );
 };
 
