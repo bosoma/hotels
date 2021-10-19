@@ -5,10 +5,11 @@ import Hotel from 'root/src/components/hotel';
 
 import styles from './styles';
 
-const HotelsList = ({hotels = null, listHeaderComponent}) => {
+const HotelsList = ({listItems = null, listHeaderComponent}) => {
+
   return (
     <View>
-      {!hotels ? (
+      {!listItems ? (
         <View style={styles.loadingContainer}>
           <ActivityIndicator size={55} />
         </View>
@@ -16,8 +17,8 @@ const HotelsList = ({hotels = null, listHeaderComponent}) => {
         <FlatList
           ListHeaderComponent={listHeaderComponent}
           keyExtractor={item => item.id}
-          data={hotels}
-          renderItem={hotelData => <Hotel hotelData={hotelData.item} />}
+          data={listItems}
+          renderItem={({item}) => <Hotel itemData={item} />}
         />
       )}
     </View>

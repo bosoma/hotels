@@ -3,7 +3,7 @@ import {View, ActivityIndicator} from 'react-native';
 
 import HotelsList from 'root/src/components/hotelsList';
 import Filter from 'root/src/components/filter';
-import {getHotels} from 'root/src/api';
+import {getHotels, getHotelsWithFlights} from 'root/src/api';
 
 import styles from './styles';
 
@@ -14,18 +14,21 @@ const filterOptions = ['name', 'city', 'stars', 'price'];
 const Home = () => {
   const [filteredElements, setFilteredElements] = useState([]);
 
-  const [hotels, setHotels] = useState([]);
+  const [listItems, setListItems] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  console.log('loading', loading)
 
   useEffect(() => {
     let isMounted = true;
-    if (!hotels.length) {
+    if (!listItems.length) {
       getHotels()
         .then(response => response.json())
         .then(result => {
+          const finalElements = result.holidayPackages || result;
           if (isMounted) {
-            setHotels(result);
-            setFilteredElements(result);
+            setListItems(finalElements);
+            setFilteredElements(finalElements);
             setLoading(false);
           }
         })
@@ -40,13 +43,13 @@ const Home = () => {
 
   const updateData = (newValue, activeFilterOptions) => {
     if (!newValue) {
-      setFilteredElements(hotels);
+      setFilteredElements(listItems);
     } else {
       const fieldsToObserve = !activeFilterOptions.length
         ? filterOptions
         : filterOptions.filter((o, i) => activeFilterOptions.includes(i));
 
-      const filtered = hotels.filter(hotel => {
+      const filtered = listItems.filter(hotel => {
         const flattenedObj = {...hotel, ...hotel.location};
         const match = fieldsToObserve.find(key => {
           const fieldValue = String(flattenedObj[key]);
@@ -69,7 +72,7 @@ const Home = () => {
   return (
     <View style={styles.bg}>
       <HotelsList
-        hotels={filteredElements}
+        listItems={filteredElements}
         listHeaderComponent={
           <Filter filterOptions={filterOptions} updateData={updateData} />
         }

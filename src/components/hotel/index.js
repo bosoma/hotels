@@ -6,14 +6,17 @@ import ItemDetails from 'root/src/components/itemDetails';
 
 import styles from './styles';
 
-const Hotel = ({hotelData}) => {
+const Hotel = ({itemData}) => {
   const defaultImg =
     'https://cdn.icon-icons.com/icons2/2490/PNG/512/hotel_icon_150155.png';
 
   const [isExpanded, setExpanded] = useState(false);
   const [avatarImg, setAvatarImg] = useState(
-    hotelData.gallery ? hotelData.gallery[0] : defaultImg,
+    itemData.gallery ? itemData.gallery[0] : defaultImg,
   );
+
+  const hotelData = itemData.hotel || itemData;
+  const flightData = itemData.flight;
 
   return (
     <TouchableOpacity
@@ -56,6 +59,7 @@ const Hotel = ({hotelData}) => {
           contact={hotelData.contact}
           images={hotelData.gallery}
           price={{qty: hotelData.price, currency: hotelData.currency}}
+          flight={flightData}
         />
       )}
     </TouchableOpacity>

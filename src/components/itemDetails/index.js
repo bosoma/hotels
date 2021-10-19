@@ -3,6 +3,8 @@ import {View, Linking, Text, TouchableOpacity} from 'react-native';
 import {Rating, PricingCard, Overlay, Icon} from 'react-native-elements';
 import Gallery from 'react-native-image-gallery';
 
+import Flight from 'root/src/components/flight';
+
 import styles from './styles';
 
 // It would be better to use a library to manage any currency ISOCode<>symbol and vice versa
@@ -11,7 +13,7 @@ const currencies = {
   USD: '$',
 };
 
-const ItemDetails = ({rating, location, checks, contact, images, price}) => {
+const ItemDetails = ({rating, location, checks, contact, images, price, flight = null}) => {
   const [isGalleryOpen, setIsOpenGallery] = useState(false);
 
   const details = [
@@ -26,6 +28,9 @@ const ItemDetails = ({rating, location, checks, contact, images, price}) => {
 
   return (
     <View style={styles.container}>
+
+      {flight && <Flight data={flight}/>}
+
       <Text style={styles.rating}>{rating} /10</Text>
 
       <Rating
